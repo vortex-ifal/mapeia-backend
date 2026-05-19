@@ -2,12 +2,18 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import { ZodValidationPipe } from 'nestjs-zod';
+import { ZodValidationFilter } from './api/filters';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
   app.setGlobalPrefix('api');
+
+  app.useGlobalPipes(new ZodValidationPipe());
+
+  app.useGlobalFilters(new ZodValidationFilter());
 
   const nodeEnv = configService.get<string>('NODE_ENV') ?? 'development';
   const isDevelopment = nodeEnv === 'development';
