@@ -1,1 +1,1 @@
-export * from './zod-validation.filter'
+export * from './zod-validation.filter';
