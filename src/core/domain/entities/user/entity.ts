@@ -34,4 +34,8 @@ export class User {
   get updatedAt(): Date | null | undefined {
     return this.props.updatedAt;
   }
+
+  set password(password: string) {
+    this.props.password = password;
+  }
 }
