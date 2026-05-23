@@ -4,10 +4,11 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { ZodValidationFilter } from './api/filters';
+import { Env } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
+  const configService = app.get<ConfigService<Env, true>>(ConfigService);
 
   app.setGlobalPrefix('api');
 
@@ -15,7 +16,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new ZodValidationFilter());
 
-  const nodeEnv = configService.get<string>('NODE_ENV') ?? 'development';
+  const nodeEnv = configService.get('NODE_ENV', { infer: true });
   const isDevelopment = nodeEnv === 'development';
 
   if (isDevelopment) {
@@ -29,7 +30,7 @@ async function bootstrap() {
     SwaggerModule.setup('api/docs', app, document);
   }
 
-  const port = configService.get<number>('PORT') ?? 8000;
+  const port = configService.get('PORT', { infer: true });
 
   await app.listen(port);
   if (isDevelopment) {
