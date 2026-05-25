@@ -1,10 +1,10 @@
-import { UserProps } from '.';
+import { CitizenProps } from '.';
 
-export class User {
-  constructor(private readonly props: UserProps) {}
+export class Citizen {
+  constructor(private readonly props: CitizenProps) {}
 
-  public static create(props: UserProps): User {
-    return new User(props);
+  public static create(props: CitizenProps): Citizen {
+    return new Citizen(props);
   }
 
   get id(): string | null | undefined {

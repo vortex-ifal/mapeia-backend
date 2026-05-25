@@ -1,4 +1,4 @@
-export interface UserProps {
+export interface CitizenProps {
   id?: string | null;
   name?: string | null;
   email?: string | null;

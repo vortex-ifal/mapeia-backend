@@ -1,1 +1,1 @@
-export * from './users.module';
+export * from './citizens.module';

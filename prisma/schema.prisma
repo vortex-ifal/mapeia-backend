@@ -11,13 +11,24 @@ datasource db {
   provider = "postgresql"
 }
 
-model users {
-  id         String    @id @default(dbgenerated("uuidv7()")) @db.Uuid
-  name       String    @db.VarChar(200)
-  email      String    @unique @db.VarChar(200)
-  password   String    @db.VarChar(60)
-  cpf        String    @unique @db.VarChar(11)
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+model User {
+  id             String          @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  email          String          @unique @db.VarChar(200)
+  password       String          @db.VarChar(60)
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  deletedAt      DateTime?       @map("deleted_at")
+  citizenProfile CitizenProfile?
+
+  @@map("users")
+}
+
+model CitizenProfile {
+  id     String @id @default(dbgenerated("uuidv7()")) @db.Uuid
+  userId String @unique @map("user_id") @db.Uuid
+  name   String
+  cpf    String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("citizen_profiles")
 }

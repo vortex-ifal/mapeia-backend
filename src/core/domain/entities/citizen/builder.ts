@@ -1,10 +1,10 @@
-import { User, UserProps } from '.';
+import { Citizen, CitizenProps } from '.';
 
-export class UserBuilder {
-  private props: Partial<UserProps> = {};
+export class CitizenBuilder {
+  private props: Partial<CitizenProps> = {};
 
-  public static create(): UserBuilder {
-    return new UserBuilder();
+  public static create(): CitizenBuilder {
+    return new CitizenBuilder();
   }
 
   public withId(id: string): this {
@@ -42,8 +42,8 @@ export class UserBuilder {
     return this;
   }
 
-  public build(): User {
-    return User.create({
+  public build(): Citizen {
+    return Citizen.create({
       id: this.props.id,
       name: this.props.name,
       email: this.props.email,

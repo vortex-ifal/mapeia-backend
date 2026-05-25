@@ -1,1 +1,1 @@
-export * from './user.service.interface';
+export * from './citizen.service.interface';
