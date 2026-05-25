@@ -3,7 +3,7 @@ import { createZodDto } from 'nestjs-zod';
 import { ApiProperty } from '@nestjs/swagger';
 import { validateCpf } from 'src/core/utils/validators/cpf.validator';
 
-const CreateUserSchema = z.object({
+const CreateCitizenSchema = z.object({
   name: z
     .string()
     .trim()
@@ -23,7 +23,7 @@ const CreateUserSchema = z.object({
     .refine(validateCpf, { message: 'CPF inválido' }),
 });
 
-export class CreateUserRequestDto extends createZodDto(CreateUserSchema) {
+export class CreateCitizenRequestDto extends createZodDto(CreateCitizenSchema) {
   @ApiProperty({
     example: 'Simon Petrikov',
   })
