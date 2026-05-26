@@ -13,9 +13,10 @@ export class CitizenRepository implements ICitizenRepository {
 
     const userCreated = await this.prisma.user.create({
       data,
+      include: { citizenProfile: true },
     });
 
-    return userCreated.id;
+    return userCreated.citizenProfile!.id;
   }
 
   async findByEmail(email: string): Promise<Citizen | null> {

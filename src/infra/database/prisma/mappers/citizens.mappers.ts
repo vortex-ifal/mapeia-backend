@@ -19,11 +19,11 @@ export class CitizensMapper {
 
   public static toDomain(user: UserWithProfile): Citizen {
     return new Citizen({
-      id: user.id,
-      name: user.citizenProfile?.name ?? null,
+      id: user.citizenProfile?.id,
+      name: user.citizenProfile?.name,
       email: user.email,
       password: user.password,
-      cpf: user.citizenProfile?.cpf ?? null,
+      cpf: user.citizenProfile?.cpf,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     });
